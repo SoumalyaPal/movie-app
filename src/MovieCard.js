@@ -13,6 +13,9 @@ class MovieCard extends React.Component{
         //this.addStars=this.addStars.bind(this);
     }
     addStars = () => {
+        if(this.state.stars === 5){
+            return;
+        }
         // form 1
         this.setState({
             stars: this.state.stars +0.5
@@ -27,6 +30,14 @@ class MovieCard extends React.Component{
         
         // this.state.stars += 0.5;
         // console.log("this: ", this);
+    }
+    removeStars = () => {
+        if(this.state.stars <= 0){
+            return;
+        }
+        this.setState({
+            stars: this.state.stars -0.5
+        });
     }
     render(){
         const {title,plot,price,rating,stars} = this.state;
@@ -46,6 +57,7 @@ class MovieCard extends React.Component{
                                 <img className="str-btn" 
                                     alt="Decrease" 
                                     src="https://cdn-icons-png.flaticon.com/128/2801/2801932.png" 
+                                    onClick={this.removeStars}
                                 />
                                 <img className="stars" 
                                         alt="stars" 
