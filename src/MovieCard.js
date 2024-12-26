@@ -4,48 +4,64 @@ class MovieCard extends React.Component{
     constructor(){
         super();
         this.state = {
-            title:"The Avengers",
-            plot:"Earth's mightiest heroes must come together and learn to fight as a team if they are going to stop the mischievous Loki and his alien army from enslaving humanity.",
-            price:199,
-            rating:8.9,
-            stars:0
-        }
-        //this.addStars=this.addStars.bind(this);
+                title: 'The Avengers', 
+                plot:
+                    "Earth's mightiest heroes must come together and learn to fight as a team if they are going to stop the mischievous Loki and his alien army from enslaving humanity.", 
+                poster:
+                    'https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg',
+                rating: '8.0',
+                price: 199,
+                star: 0,
+                fav: false,
+                isInCart: false
+        } 
+  }
+  addStars = () => {
+    if(this.state.star >= 5){
+        return
     }
-    addStars = () => {
-        if(this.state.stars === 5){
-            return;
-        }
-        // form 1
-        this.setState({
-            stars: this.state.stars +0.5
-        });
+    //Form 1 of setState() - increasing the star count by 0.5
+    this.setState({
+        star : this.state.star + 0.5
+    })
 
-        // form 2
-        // this.setState((prevState) => {
-        //     return{
-        //         stars: this.prevState.stars+0.5
-        //     }
-        // });
-        
-        // this.state.stars += 0.5;
-        // console.log("this: ", this);
-    }
-    removeStars = () => {
-        if(this.state.stars <= 0){
-            return;
+    //Form 2 of setState() - increasing the star count by 0.5
+    /**
+    this.setState((prevState) => {
+        return {
+            star: prevState + 0.5
         }
-        this.setState({
-            stars: this.state.stars -0.5
-        });
+    })
+     */
+  }
+  decStars = () => {
+    if(this.state.star <= 0){
+        return
     }
+    //form1 of setState
+    this.setState({
+        star: this.state.star - 0.5
+    })
+  }
+  toggleFav= () => {
+    this.setState({
+        fav: !this.state.fav
+    })
+  }
+  toggleCart= () => {
+    this.setState({
+        isInCart: !this.state.isInCart
+    })
+ }
+
     render(){
-        const {title,plot,price,rating,stars} = this.state;
+        const {title, plot, poster, price, rating,star,fav,isInCart} =  this.state;
+          
         return(
             <div className="main">
                 <div className="movie-card">
                     <div className="left">
-                        <img alt="poster" src='https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg' />
+                        <img alt="poster" src={poster} />
                     </div>
                     <div className="right">
                         <div className="title">{title}</div>
@@ -57,7 +73,7 @@ class MovieCard extends React.Component{
                                 <img className="str-btn" 
                                     alt="Decrease" 
                                     src="https://cdn-icons-png.flaticon.com/128/2801/2801932.png" 
-                                    onClick={this.removeStars}
+                                    onClick={this.decStars}
                                 />
                                 <img className="stars" 
                                         alt="stars" 
@@ -66,12 +82,17 @@ class MovieCard extends React.Component{
                                 <img className="str-btn" 
                                     alt="increase" 
                                     src="https://cdn-icons-png.flaticon.com/128/2997/2997933.png"
-                                    onClick={this.addStars} 
+                                    onClick={this.addStars}
                                 />
-                                <span className="starCount">{stars}</span>
+                                <span className="starCount">{star}</span>
                             </div>
-                            <button className="favourite-btn">Favourite</button>
-                            <button className="cart-btn">Add to Cart</button>  
+                            <button className={fav?"unfavourite-btn":"favourite-btn"}  onClick={this.toggleFav}>
+                                {fav ? "Un-favourite":"Favourite"}
+                            </button>
+                            <button className={isInCart?"unfavourite-btn":"cart-btn"}  onClick={this.toggleCart}>
+                                {isInCart ? "Remove from Cart":"Add to Cart"}
+                            </button>
+                            
                         </div>
                     </div>
                 </div>
