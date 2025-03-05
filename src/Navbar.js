@@ -9,7 +9,6 @@ const Nav =  styled.div`
 	justify-content: space-between;
 	align-items: center;
 	position: relative;
-  
 `;
 
 const Title = styled.div`
@@ -19,8 +18,8 @@ const Title = styled.div`
     font-family: 'Times New Roman', Times, serif;
     text-transform: uppercase;
     margin-left: 20px ;
+    &:hover{color: #0f0} 
 `;
-
 
 const CartImg = styled.img`
     height: 48px;
@@ -33,20 +32,18 @@ const CartIconContainer = styled.div`
 `;
 
 const CartCount = styled.div`
-    background: yellow;
+    background-color: ${(props) => props.color};
     border-radius: 50%;
     padding: 4px 8px;
     position: absolute;
     right: 10px;
     top: -5px;
     font-size: 12px;
+    visibility: ${(props) => props.show? "visible" : "hidden"}};
 `;
-
-
 
 class Navbar extends React.Component {
 
-  
     render() {   
        
       return (
@@ -59,7 +56,7 @@ class Navbar extends React.Component {
             <CartImg alt="Cart-Icon" 
                  src = "https://cdn-icons-png.flaticon.com/128/891/891462.png"    
             />
-            <CartCount >5</CartCount>
+            <CartCount color="yellow" show={true}>5</CartCount>
         </CartIconContainer>
       </Nav>
 
@@ -68,6 +65,5 @@ class Navbar extends React.Component {
     }
   }  
  
-  
   export default Navbar;
   
