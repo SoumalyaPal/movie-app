@@ -1,11 +1,8 @@
 import React from "react";
 
-class MovieCard extends React.Component{
-
-    render(){
-        
-        const {movies, onIncStars, onClickFav, onClickAddtocart, onDecStars} =  this.props
-        const {title, plot, poster, price, rating,stars,fav,isInCart} =  this.props.movies;
+function MovieCard(props){
+        const {movies, onIncStars, onClickFav, onClickAddtocart, onDecStars} =  props;
+        const {title, plot, poster, price, rating,stars,fav,isInCart} =  props.movies;
         
           
         return(
@@ -72,6 +69,5 @@ class MovieCard extends React.Component{
           
         )
     }
-}
 
 export default MovieCard;
